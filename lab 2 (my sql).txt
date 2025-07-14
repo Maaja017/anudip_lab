@@ -1,0 +1,103 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.42 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use shop;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_shop |
++----------------+
+| customer       |
+| orders         |
+| product        |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc customer;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| customer_id | varchar(7)  | NO   | PRI | NULL    |       |
+| name        | varchar(12) | NO   |     | NULL    |       |
+| email       | varchar(25) | NO   |     | NULL    |       |
+| phone_no    | bigint      | NO   |     | NULL    |       |
+| address     | varchar(50) | NO   |     | NULL    |       |
+| city        | varchar(12) | NO   |     | NULL    |       |
+| pincode     | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------+-----------------------+------------+-----------------+---------+---------+
+| customer_id | name   | email                 | phone_no   | address         | city    | pincode |
++-------------+--------+-----------------------+------------+-----------------+---------+---------+
+| C001        | Shreya | ShreyaU@gmail.com     | 9696969696 | Ghatkopar East  | Mumbai  |  400077 |
+| C002        | Sai    | saiUtekar@gmail.com   | 9999966666 | Ghatkopar west  | Mumbai  |  400086 |
+| C003        | Jeeva  | jeevasunder@gmail.com | 8591333696 | Dharavi         | Mumbai  |  400017 |
+| C004        | Maaja  | Maaja07@gmail.com     | 8850052139 | sion            | Mumbai  |  400020 |
+| C005        | Aval   | Ennaval@gmail.com     | 7056978828 | Anna nagar      | Chennai |  602398 |
++-------------+--------+-----------------------+------------+-----------------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> desc product;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| product_id     | varchar(12) | NO   | PRI | NULL    |       |
+| product_name   | varchar(10) | NO   |     | NULL    |       |
+| category       | varchar(15) | NO   |     | NULL    |       |
+| sub_category   | varchar(15) | NO   |     | NULL    |       |
+| Original_price | varchar(10) | NO   |     | NULL    |       |
+| selling_price  | varchar(10) | NO   |     | NULL    |       |
+| stock          | varchar(20) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from product;
++------------+--------------+-----------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category        | sub_category | Original_price | selling_price | stock |
++------------+--------------+-----------------+--------------+----------------+---------------+-------+
+| P001       | Shoe         | Dress           | Foot wear    | 4999           | 2599          | 15    |
+| P002       | Jersey       | Dress           | T-shirt      | 1999           | 999           | 69    |
+| P003       | JBLSpeaker   | Electronics     | Speaker      | 7999           | 5699          | 3     |
+| P004       | Pan          | Home appliances | Kitchen      | 1399           | 749           | 17    |
+| P005       | Bat          | Sports          | Cricket      | 3999           | 2199          | 10    |
++------------+--------------+-----------------+--------------+----------------+---------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc orders;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| order_id     | varchar(10) | NO   |     | NULL    |       |
+| customer_id  | varchar(7)  | NO   | MUL | NULL    |       |
+| product_id   | varchar(7)  | NO   | MUL | NULL    |       |
+| quantity     | int         | NO   |     | NULL    |       |
+| total_price  | bigint      | NO   |     | NULL    |       |
+| payment_mode | varchar(20) | NO   |     | NULL    |       |
+| order_date   | varchar(12) | NO   |     | NULL    |       |
+| order_status | varchar(20) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from orders;
++----------+-------------+------------+----------+-------------+--------------+------------+---------------+
+| order_id | customer_id | product_id | quantity | total_price | payment_mode | order_date | order_status  |
++----------+-------------+------------+----------+-------------+--------------+------------+---------------+
+| ODR001   | C001        | P001       |        2 |        5188 | Online       | 10/6/2025  | Delivered     |
+| ODR002   | C002        | P002       |       35 |       34965 | COD          | 5/7/2025   | Not-Delivered |
+| ODR003   | C003        | P003       |        2 |       11398 | EMI          | 25/6/2025  | Delivered     |
+| ODR004   | C004        | P004       |        7 |        5243 | COD          | 3/7/2025   | Not-Delivered |
+| ODR005   | C005        | P005       |        5 |       10995 | Online       | 14/2/2025  | Delivered     |
++----------+-------------+------------+----------+-------------+--------------+------------+---------------+
+5 rows in set (0.00 sec)
+
